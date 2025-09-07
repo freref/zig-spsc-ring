@@ -4,7 +4,7 @@ pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    const mod = b.addModule("unmanaged_spsc_queue", .{
+    const mod = b.addModule("spsc_ring", .{
         .root_source_file = b.path("spsc_ring.zig"),
         .target = target,
     });
