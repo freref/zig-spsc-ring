@@ -16,7 +16,7 @@ pub fn build(b: *std.Build) void {
             .target = target,
             .optimize = optimize,
             .imports = &.{
-                .{ .name = "spsc_queue", .module = mod },
+                .{ .name = "spsc_ring", .module = mod },
             },
         }),
     });
