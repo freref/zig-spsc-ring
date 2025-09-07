@@ -16,14 +16,14 @@ fn producer(ring: *Ring(u64)) void {
 }
 
 fn consumer(ring: *Ring(u64)) !void {
-    const stdout_file = std.io.getStdOut().writer();
-    var bw = std.io.bufferedWriter(stdout_file);
-    const stdout = bw.writer();
+    var stdout_buffer: [1024]u8 = undefined;
+    var stdout_writer = std.fs.File.stdout().writer(&stdout_buffer);
+    const stdout = &stdout_writer.interface;
 
     while (true) {
         if (ring.dequeue()) |answer| {
             try stdout.print("answer = {}\n", .{answer});
-            try bw.flush();
+            try stdout.flush();
             return;
         }
     }
